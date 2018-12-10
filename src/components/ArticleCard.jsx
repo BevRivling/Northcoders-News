@@ -1,7 +1,7 @@
 import React from "react";
+import heart from "../img/heart.png";
 
 const ArticleCard = ({ articleInfo }) => {
-  console.log(articleInfo);
   return (
     <div className="article-card">
       <div className="placeholder" />
@@ -10,6 +10,7 @@ const ArticleCard = ({ articleInfo }) => {
         <p>Author: {articleInfo.author}</p>
         <p>Date: {articleInfo.created_at}</p>
         <p>Votes: {articleInfo.votes}</p>
+        <img id="heart" src={heart} alt="upvote" />
       </div>
     </div>
   );

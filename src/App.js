@@ -31,7 +31,6 @@ class App extends Component {
   }
 
   toggleNav = () => {
-    console.log(this.state.toggleNav);
     this.setState(prevState => ({
       toggleNav: !prevState.toggleNav
     }));

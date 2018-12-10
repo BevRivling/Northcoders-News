@@ -10,7 +10,7 @@ const Header = ({ toggleNav, colours }) => {
     >
       <img
         id="logo"
-        className={` ${colours ? "active" : "inactive"}`}
+        className={` ${colours ? "white" : "red"}`}
         alt="northcoders logo"
         src={colours ? whiteLogo : redLogo}
       />
