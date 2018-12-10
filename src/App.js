@@ -1,28 +1,52 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Articles from "./components/Articles";
+import SideFooter from "./components/SideFooter";
+import Nav from "./components/Nav";
+import Focus from "./components/Focus";
+import * as api from "./api";
 
 class App extends Component {
+  state = {
+    articles: [],
+    topics: [],
+    toggleNav: false
+  };
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Header toggleNav={this.toggleNav} />
+        <Nav toggleNav={this.state.toggleNav} topics={this.state.topics} />
+        <Articles articles={this.state.articles} />
+        <SideFooter />
+        <Focus />
       </div>
     );
   }
+
+  componentDidMount() {
+    this.getNav();
+    this.getArticles();
+  }
+
+  toggleNav = () => {
+    console.log(this.state.toggleNav);
+    this.setState(prevState => ({
+      toggleNav: !prevState.toggleNav
+    }));
+  };
+
+  getArticles = () => {
+    api.getArticles().then(articles => {
+      this.setState({ articles });
+    });
+  };
+  getNav = () => {
+    api.getTopics().then(topics => {
+      this.setState({ topics });
+    });
+  };
 }
 
 export default App;
