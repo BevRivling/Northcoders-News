@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header toggleNav={this.toggleNav} />
+        <Header toggleNav={this.toggleNav} colours={this.state.toggleNav} />
         <Nav toggleNav={this.state.toggleNav} topics={this.state.topics} />
         <Articles articles={this.state.articles} />
         <SideFooter />
