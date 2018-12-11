@@ -27,3 +27,10 @@ export const getArticleById = async id => {
   const { data } = await axios.get(`${BASE_URL}articles/${id}`);
   return data;
 };
+
+export const getCommentsByArticleId = async id => {
+  const {
+    data: { comments }
+  } = await axios.get(`${BASE_URL}articles/${id}/comments`);
+  return comments;
+};

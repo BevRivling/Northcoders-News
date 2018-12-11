@@ -10,7 +10,6 @@ const ArticleCard = ({ articleInfo }) => {
         <p>Author: {articleInfo.author}</p>
         <p>Date: {articleInfo.created_at.slice(0, -15)}</p>
         <p>Votes: {articleInfo.votes}</p>
-        <img id="heart" src={heart} alt="upvote" />
       </div>
     </div>
   );

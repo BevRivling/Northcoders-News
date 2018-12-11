@@ -49,9 +49,19 @@ body {
   position: absolute;
 }
 
+.inactive #logo {
+  opacity: 0.7;
+}
+
+.inactive #logo:hover {
+  opacity: 1;
+}
+.active #logo:hover {
+  opacity: 0.7;
+}
+
 #logo:hover {
   cursor: pointer;
-  opacity: 0.7;
 }
 
 .active {
@@ -183,12 +193,16 @@ body {
 }
 .article-card:hover {
   cursor: pointer;
+  opacity: 0.9;
+  box-shadow: 5px 5px 20px #42393a;
+  transition: 200ms;
 }
 
 .article-card .card-content {
   text-align: right;
   padding: 5px 20px 5px 5px;
   flex-grow: 3;
+  max-height: 1vh;
 }
 
 .article-card .placeholder {
@@ -202,6 +216,10 @@ body {
   border: 2px solid #1c3144;
 }
 
+row {
+  display: flex;
+}
+
 /* Side and Footer */
 .side-footer {
   display: flex;
@@ -212,7 +230,6 @@ body {
 }
 
 .side-footer #add-button {
-  display: inline;
   background: linear-gradient(
     to bottom right,
     rgba(132, 238, 100, 0.8),
@@ -223,7 +240,6 @@ body {
   justify-content: center;
   font-size: 4em;
   color: white;
-  /* padding: 0vw 1.4vw 0.8vw 1.4vw; */
   margin: auto;
   margin-bottom: 30px;
   text-align: center;
@@ -243,15 +259,16 @@ body {
 /* Focus Card */
 .focus-card {
   display: flex;
+  flex-direction: column;
   position: absolute;
   margin: auto;
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: -180px;
   margin: auto;
-  height: 60vh;
-  width: 65vw;
+  height: 70vh;
+  width: 75vw;
   z-index: 10;
   background-color: rgba(28, 49, 68, 0.7);
   border: 4px #1c3144 solid;
@@ -271,7 +288,8 @@ body {
 }
 
 .focus-card .placeholder {
-  margin: 20px;
+  margin: 30px;
+  margin-left: 50px;
   flex-grow: 1;
   min-width: 350px;
   max-width: 350px;
@@ -286,7 +304,7 @@ body {
 }
 
 .vote #heart-focus {
-  display: inline;
+  /* display: inline; */
   max-width: 45px;
   min-height: 40px;
   margin: auto;
@@ -308,7 +326,7 @@ body {
 }
 
 .comment-button {
-  display: inline;
+  /* display: inline; */
   background: linear-gradient(
     to bottom right,
     rgba(132, 238, 100, 0.8),
@@ -340,4 +358,48 @@ body {
   margin: auto;
   margin-top: 100px;
   font-size: 7em;
+}
+
+/* Comment Section */
+
+.wrapper {
+  overflow: hidden;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  height: 30%;
+  width: 90%;
+}
+.comment-reel {
+  display: flex;
+  background-color: transparent;
+  margin: 0 20px 20px 0px;
+}
+.comment-card {
+  flex: 1;
+  height: 100px;
+  color: white;
+  font-size: 1.3em;
+  user-select: none;
+  overflow: auto;
+  text-align: right;
+}
+
+.comment-card .comm-auth {
+  font-size: 0.7em;
+}
+
+.comment-card::-webkit-scrollbar {
+  display: none;
+}
+.comment-reel button {
+  width: 50px;
+  margin: 20px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 6em;
+  cursor: pointer;
+  opacity: 0.8;
+  user-select: none;
 }
