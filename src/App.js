@@ -5,13 +5,15 @@ import Articles from "./components/Articles";
 import SideFooter from "./components/SideFooter";
 import Nav from "./components/Nav";
 import Focus from "./components/Focus";
+
 import * as api from "./api";
 
 class App extends Component {
   state = {
     articles: [],
     topics: [],
-    toggleNav: false
+    toggleNav: false,
+    isLoaded: false
   };
   render() {
     return (
@@ -27,7 +29,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getNav();
-    this.getArticles();
   }
 
   toggleNav = () => {
@@ -36,11 +37,6 @@ class App extends Component {
     }));
   };
 
-  getArticles = () => {
-    api.getArticles().then(articles => {
-      this.setState({ articles });
-    });
-  };
   getNav = () => {
     api.getTopics().then(topics => {
       this.setState({ topics });

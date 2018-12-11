@@ -25,6 +25,7 @@ body {
     "nav main  side-footer"
     "nav  main  side-footer";
 }
+
 /* Header */
 .header {
   user-select: none;
@@ -32,6 +33,7 @@ body {
   grid-area: header;
   background-color: transparent;
   margin-right: 50px;
+  min-height: 180px;
 }
 
 .header h1 {
@@ -113,6 +115,12 @@ body {
 
 .articles-list::-webkit-scrollbar {
   display: none;
+}
+
+/* Loader */
+.main #loading {
+  display: flex-grow;
+  margin-left: 22vw;
 }
 
 .articles-list li {
