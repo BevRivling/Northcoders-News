@@ -1,11 +1,18 @@
 import React from "react";
+import { Link } from "@reach/router";
 
-const Nav = ({ topics, toggleNav }) => {
+const Nav = ({ topics, toggleNav, chooseTopic }) => {
   const navLinks = (
     <ul className="nav-links">
-      <li key="all">all</li>
+      <li key="all" onClick={() => chooseTopic("all")}>
+        all
+      </li>
       {topics.map(topic => {
-        return <li key={topic.slug}>{topic.slug}</li>;
+        return (
+          <li key={topic.slug} onClick={() => chooseTopic(topic.slug)}>
+            {topic.slug}
+          </li>
+        );
       })}
     </ul>
   );
@@ -18,3 +25,13 @@ const Nav = ({ topics, toggleNav }) => {
 };
 
 export default Nav;
+
+// const Nav = () => {
+//   return (
+//     <nav>
+//       <Link to="/">Home</Link>
+//       <Link to="/students">Students</Link>
+//       <Link to="/blocks">Blocks</Link>
+//     </nav>
+//   );
+// };

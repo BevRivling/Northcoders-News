@@ -163,7 +163,12 @@ body {
 
 #heart {
   max-width: 30px;
-  background-color: rgba(28, 49, 68, 0.8);
+  background: linear-gradient(
+    to bottom right,
+    rgba(40, 70, 97, 0.8),
+    rgba(33, 58, 80, 0.8),
+    rgba(18, 32, 44, 0.8)
+  );
   padding: 20px;
   border-radius: 100%;
 }

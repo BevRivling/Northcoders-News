@@ -35,11 +35,18 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    this.getArticles();
+    this.getArticles(this.props.topicSlug);
   }
 
-  getArticles = () => {
-    api.getArticles().then(articles => {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props !== prevProps) {
+      this.getArticles(this.props.topicSlug);
+    }
+  }
+
+  getArticles = slug => {
+    console.log(slug);
+    api.getArticles(slug).then(articles => {
       this.setState({ articles: articles, isLoaded: true });
     });
   };

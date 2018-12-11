@@ -9,6 +9,7 @@ import * as api from "./api";
 
 class App extends Component {
   state = {
+    topicSlug: "",
     articles: [],
     topics: [],
     toggleNav: false
@@ -17,8 +18,15 @@ class App extends Component {
     return (
       <div className="App">
         <Header toggleNav={this.toggleNav} colours={this.state.toggleNav} />
-        <Nav toggleNav={this.state.toggleNav} topics={this.state.topics} />
-        <Articles articles={this.state.articles} />
+        <Nav
+          toggleNav={this.state.toggleNav}
+          chooseTopic={this.chooseTopic}
+          topics={this.state.topics}
+        />
+        <Articles
+          articles={this.state.articles}
+          topicSlug={this.state.topicSlug}
+        />
         <SideFooter />
         <Focus />
       </div>
@@ -33,6 +41,10 @@ class App extends Component {
     this.setState(prevState => ({
       toggleNav: !prevState.toggleNav
     }));
+  };
+
+  chooseTopic = topic => {
+    this.setState({ topicSlug: topic });
   };
 
   getNav = () => {

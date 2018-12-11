@@ -8,9 +8,18 @@ export const getTopics = async () => {
   return topics;
 };
 
-export const getArticles = async () => {
-  const {
-    data: { articles }
-  } = await axios.get(`${BASE_URL}articles`);
-  return articles;
+export const getArticles = async slug => {
+  if (slug === "") return [];
+  if (slug === "all") {
+    const {
+      data: { articles }
+    } = await axios.get(`${BASE_URL}articles`);
+    return articles;
+  } else {
+    const {
+      data: { msg }
+    } = await axios.get(`${BASE_URL}topics/${slug}/articles`);
+    console.log(msg);
+    return msg;
+  }
 };
