@@ -9,25 +9,29 @@ class Articles extends Component {
     isLoaded: false
   };
   render() {
-    return (
-      <div className="main">
-        {this.state.isLoaded ? (
-          <ul className="articles-list">
-            {this.props.articles.map(article => {
-              return (
-                <li id={article.article_id}>
-                  <ArticleCard articleInfo={article} />
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <div className="grey-background">
-            <img alt="loading" id="loading" src={loading} />
-          </div>
-        )}
-      </div>
-    );
+    let content;
+    if (this.state.isLoaded) {
+      console.log(this.state.articles);
+      content = (
+        <ul className="articles-list">
+          {this.state.articles.map(article => {
+            return (
+              <li id={article.article_id}>
+                <ArticleCard articleInfo={article} />
+              </li>
+            );
+          })}
+        </ul>
+      );
+    } else {
+      content = (
+        <div className="grey-background">
+          <img alt="loading" id="loading" src={loading} />
+        </div>
+      );
+    }
+
+    return <div className="main">{content}</div>;
   }
 
   componentDidMount() {
@@ -36,7 +40,6 @@ class Articles extends Component {
 
   getArticles = () => {
     api.getArticles().then(articles => {
-      console.log(articles);
       this.setState({ articles: articles, isLoaded: true });
     });
   };

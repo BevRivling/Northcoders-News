@@ -3,9 +3,9 @@ import React from "react";
 const Nav = ({ topics, toggleNav }) => {
   const navLinks = (
     <ul className="nav-links">
-      <li id="all">all</li>
+      <li key="all">all</li>
       {topics.map(topic => {
-        return <li id={topic.slug}>{topic.slug}</li>;
+        return <li key={topic.slug}>{topic.slug}</li>;
       })}
     </ul>
   );

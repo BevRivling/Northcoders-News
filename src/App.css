@@ -158,11 +158,12 @@ body {
 
 .article-card {
   display: flex;
+  box-shadow: 2px 2px 10px #42393a;
 }
 
 #heart {
   max-width: 30px;
-  background-color: rgba(28, 49, 68, 0.6);
+  background-color: rgba(28, 49, 68, 0.8);
   padding: 20px;
   border-radius: 100%;
 }
