@@ -2,7 +2,8 @@ import React from "react";
 
 const Nav = ({ topics, toggleNav }) => {
   const navLinks = (
-    <ul>
+    <ul className="nav-links">
+      <li id="all">all</li>
       {topics.map(topic => {
         return <li id={topic.slug}>{topic.slug}</li>;
       })}

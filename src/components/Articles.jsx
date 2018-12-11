@@ -15,14 +15,16 @@ class Articles extends Component {
           <ul className="articles-list">
             {this.props.articles.map(article => {
               return (
-                <li>
+                <li id={article.article_id}>
                   <ArticleCard articleInfo={article} />
                 </li>
               );
             })}
           </ul>
         ) : (
-          <img id="loading" src={loading} />
+          <div className="grey-background">
+            <img alt="loading" id="loading" src={loading} />
+          </div>
         )}
       </div>
     );
@@ -34,6 +36,7 @@ class Articles extends Component {
 
   getArticles = () => {
     api.getArticles().then(articles => {
+      console.log(articles);
       this.setState({ articles: articles, isLoaded: true });
     });
   };

@@ -5,15 +5,13 @@ import Articles from "./components/Articles";
 import SideFooter from "./components/SideFooter";
 import Nav from "./components/Nav";
 import Focus from "./components/Focus";
-
 import * as api from "./api";
 
 class App extends Component {
   state = {
     articles: [],
     topics: [],
-    toggleNav: false,
-    isLoaded: false
+    toggleNav: false
   };
   render() {
     return (
