@@ -19,7 +19,11 @@ export const getArticles = async slug => {
     const {
       data: { msg }
     } = await axios.get(`${BASE_URL}topics/${slug}/articles`);
-    console.log(msg);
     return msg;
   }
+};
+
+export const getArticleById = async id => {
+  const { data } = await axios.get(`${BASE_URL}articles/${id}`);
+  return data;
 };

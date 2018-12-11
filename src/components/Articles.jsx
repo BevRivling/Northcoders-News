@@ -1,22 +1,29 @@
 import React, { Component } from "react";
 import ArticleCard from "./ArticleCard";
+import FocusCard from "./FocusCard";
 import * as api from "../api";
 import loading from "../img/loading.svg";
 
 class Articles extends Component {
   state = {
     articles: [],
-    isLoaded: false
+    isLoaded: false,
+    focusArticle: {},
+    isFocused: false
   };
   render() {
     let content;
     if (this.state.isLoaded) {
-      console.log(this.state.articles);
       content = (
         <ul className="articles-list">
           {this.state.articles.map(article => {
             return (
-              <li id={article.article_id}>
+              <li
+                key={article.article_id}
+                onClick={() => {
+                  this.getArticleById(article.article_id);
+                }}
+              >
                 <ArticleCard articleInfo={article} />
               </li>
             );
@@ -31,7 +38,19 @@ class Articles extends Component {
       );
     }
 
-    return <div className="main">{content}</div>;
+    return (
+      <div className="main">
+        {content}
+        {this.state.isFocused ? (
+          <FocusCard
+            toggleFocus={this.toggleFocus}
+            focusArticle={this.state.focusArticle}
+          />
+        ) : (
+          <div />
+        )}
+      </div>
+    );
   }
 
   componentDidMount() {
@@ -42,12 +61,27 @@ class Articles extends Component {
     if (this.props !== prevProps) {
       this.getArticles(this.props.topicSlug);
     }
+    if (this.state.focusArticle !== prevState.focusArticle) {
+      this.toggleFocus(this.state.focusArticle);
+    }
   }
 
+  toggleFocus = focusArticle => {
+    this.setState(prevState => ({
+      isFocused: !prevState.isFocused
+    }));
+    console.log(focusArticle, this.state.isFocused);
+  };
+
   getArticles = slug => {
-    console.log(slug);
     api.getArticles(slug).then(articles => {
       this.setState({ articles: articles, isLoaded: true });
+    });
+  };
+
+  getArticleById = id => {
+    api.getArticleById(id).then(article => {
+      this.setState({ focusArticle: article });
     });
   };
 }

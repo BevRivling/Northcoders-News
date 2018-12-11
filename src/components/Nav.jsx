@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "@reach/router";
 
 const Nav = ({ topics, toggleNav, chooseTopic }) => {
   const navLinks = (
