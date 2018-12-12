@@ -45,6 +45,7 @@ class Articles extends Component {
           <FocusCard
             toggleFocus={this.toggleFocus}
             focusArticle={this.state.focusArticle}
+            addVote={this.addVote}
           />
         ) : (
           <div />
@@ -70,12 +71,21 @@ class Articles extends Component {
     this.setState(prevState => ({
       isFocused: !prevState.isFocused
     }));
-    console.log(focusArticle, this.state.isFocused);
+  };
+
+  addVote = articleId => {
+    api.voteArticleById(articleId).then(console.log);
   };
 
   getArticles = slug => {
     api.getArticles(slug).then(articles => {
-      this.setState({ articles: articles, isLoaded: true });
+      if (this.state.isLoaded) this.setState({ articles: articles });
+      else {
+        // Sorry - this is just to show off my loading icon
+        setTimeout(() => {
+          this.setState({ articles: articles, isLoaded: true });
+        }, 5000);
+      }
     });
   };
 

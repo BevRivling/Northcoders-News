@@ -34,3 +34,8 @@ export const getCommentsByArticleId = async id => {
   } = await axios.get(`${BASE_URL}articles/${id}/comments`);
   return comments;
 };
+
+export const voteArticleById = async id => {
+  const body = { inc_votes: 1 };
+  const { data } = axios.patch(`${BASE_URL}articles/${id}`, body);
+};

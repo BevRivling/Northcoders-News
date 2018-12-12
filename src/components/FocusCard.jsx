@@ -3,7 +3,7 @@ import AddComment from "./AddComment";
 import AddVote from "./AddVote";
 import CommentReel from "./CommentReel";
 
-const FocusCard = ({ toggleFocus, focusArticle }) => {
+const FocusCard = ({ toggleFocus, focusArticle, addVote }) => {
   console.log(focusArticle.article_id);
   return (
     <React.Fragment>
@@ -21,7 +21,7 @@ const FocusCard = ({ toggleFocus, focusArticle }) => {
             <p>{focusArticle.body}</p>
             <div className="card-buttons">
               <AddComment />
-              <AddVote />
+              <AddVote addVote={addVote} id={focusArticle.article_id} />
             </div>
           </div>
         </row>

@@ -44,11 +44,16 @@ class CommentReel extends Component {
   };
 
   changeComment = direction => {
-    console.log(this.state);
+    const maxComments = this.state.comments.length - 1;
+    let increment = 0;
     this.setState(prevState => {
-      currentComment: direction === "next"
-        ? prevState.currentComment++
-        : prevState.currentComment--;
+      if (direction === "next") increment = prevState.currentComment + 1;
+      else increment = prevState.currentComment - 1;
+      if (increment > maxComments) increment = increment - maxComments;
+      if (increment < 0) increment = increment + maxComments;
+      return {
+        currentComment: increment
+      };
     });
   };
 }
