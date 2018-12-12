@@ -1,16 +1,21 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 const Nav = ({ topics, toggleNav, chooseTopic }) => {
   const navLinks = (
     <ul className="nav-links">
-      <li key="all" onClick={() => chooseTopic("all")}>
-        all
-      </li>
+      <Link to="/articles/all">
+        <li key="all" onClick={() => chooseTopic("all")}>
+          all
+        </li>
+      </Link>
       {topics.map(topic => {
         return (
-          <li key={topic.slug} onClick={() => chooseTopic(topic.slug)}>
-            {topic.slug}
-          </li>
+          <Link to={`/articles/${topic.slug}`}>
+            <li key={topic.slug} onClick={() => chooseTopic(topic.slug)}>
+              {topic.slug}
+            </li>
+          </Link>
         );
       })}
     </ul>

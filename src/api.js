@@ -9,6 +9,7 @@ export const getTopics = async () => {
 };
 
 export const getArticles = async slug => {
+  console.log(slug);
   if (slug === "") return [];
   if (slug === "all") {
     const {

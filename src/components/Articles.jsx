@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import ArticleCard from "./ArticleCard";
 import FocusCard from "./FocusCard";
 import * as api from "../api";
-import loading from "../img/loading.svg";
+import { Router } from "@reach/router";
+import Loading from "./Loading";
 
 class Articles extends Component {
   state = {
@@ -11,6 +12,7 @@ class Articles extends Component {
     focusArticle: {},
     isFocused: false
   };
+
   render() {
     let content;
     if (this.state.isLoaded) {
@@ -31,11 +33,7 @@ class Articles extends Component {
         </ul>
       );
     } else {
-      content = (
-        <div className="grey-background">
-          <img alt="loading" id="loading" src={loading} />
-        </div>
-      );
+      content = <Loading />;
     }
 
     return (
@@ -55,7 +53,8 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    this.getArticles(this.props.topicSlug);
+    console.log(this.props.topic);
+    this.getArticles(this.props.topic);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -84,7 +83,7 @@ class Articles extends Component {
         // Sorry - this is just to show off my loading icon
         setTimeout(() => {
           this.setState({ articles: articles, isLoaded: true });
-        }, 5000);
+        }, 3000);
       }
     });
   };

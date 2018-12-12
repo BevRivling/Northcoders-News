@@ -6,6 +6,7 @@ import SideFooter from "./components/SideFooter";
 import Nav from "./components/Nav";
 import Focus from "./components/Focus";
 import * as api from "./api";
+import { Router } from "@reach/router";
 
 class App extends Component {
   state = {
@@ -23,10 +24,18 @@ class App extends Component {
           chooseTopic={this.chooseTopic}
           topics={this.state.topics}
         />
-        <Articles
-          articles={this.state.articles}
-          topicSlug={this.state.topicSlug}
-        />
+        <Router>
+          <Articles
+            path="/articles/"
+            articles={this.state.articles}
+            topicSlug={this.state.topicSlug}
+          />
+          <Articles
+            path="/articles/:topic"
+            articles={this.state.articles}
+            topicSlug={this.state.topicSlug}
+          />
+        </Router>
         <SideFooter />
         <Focus />
       </div>
