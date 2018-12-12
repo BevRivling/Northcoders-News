@@ -28,9 +28,7 @@ class CommentReel extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.comments[this.state.currentComment]);
     if (this.state.currentComment !== prevState.currentComment) {
-      console.log("should be changing!");
       this.getComments(this.props.id);
     }
   }

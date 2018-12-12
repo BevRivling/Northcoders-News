@@ -26,7 +26,7 @@ class App extends Component {
         />
         <Router>
           <Articles
-            path="/articles/"
+            path="/articles/all"
             articles={this.state.articles}
             topicSlug={this.state.topicSlug}
           />

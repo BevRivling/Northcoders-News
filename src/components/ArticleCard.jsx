@@ -1,5 +1,5 @@
 import React from "react";
-import heart from "../img/heart.png";
+import { Router } from "@reach/router";
 
 const ArticleCard = ({ articleInfo }) => {
   return (
@@ -9,7 +9,6 @@ const ArticleCard = ({ articleInfo }) => {
         <h4>{articleInfo.title}</h4>
         <p>Author: {articleInfo.author}</p>
         <p>Date: {articleInfo.created_at.slice(0, -15)}</p>
-        <p>Votes: {articleInfo.votes}</p>
       </div>
     </div>
   );

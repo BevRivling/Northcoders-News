@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ArticleCard from "./ArticleCard";
 import FocusCard from "./FocusCard";
 import * as api from "../api";
-import { Router } from "@reach/router";
 import Loading from "./Loading";
 
 class Articles extends Component {
@@ -43,7 +42,6 @@ class Articles extends Component {
           <FocusCard
             toggleFocus={this.toggleFocus}
             focusArticle={this.state.focusArticle}
-            addVote={this.addVote}
           />
         ) : (
           <div />
@@ -53,7 +51,6 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.topic);
     this.getArticles(this.props.topic);
   }
 
@@ -70,10 +67,6 @@ class Articles extends Component {
     this.setState(prevState => ({
       isFocused: !prevState.isFocused
     }));
-  };
-
-  addVote = articleId => {
-    api.voteArticleById(articleId).then(console.log);
   };
 
   getArticles = slug => {
