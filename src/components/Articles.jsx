@@ -76,7 +76,7 @@ class Articles extends Component {
         // Sorry - this is just to show off my loading icon
         setTimeout(() => {
           this.setState({ articles: articles, isLoaded: true });
-        }, 3000);
+        }, 1000);
       }
     });
   };

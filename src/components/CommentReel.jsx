@@ -4,7 +4,7 @@ import * as api from "../api";
 
 class CommentReel extends Component {
   state = {
-    comments: [{ author: "bevan", votes: 20, body: "hey" }],
+    comments: [{ author: "", votes: 0, body: "" }],
     currentComment: 0
   };
 
@@ -29,6 +29,9 @@ class CommentReel extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentComment !== prevState.currentComment) {
+      this.getComments(this.props.id);
+    }
+    if (this.props.commentToPost !== prevProps.commentToPost) {
       this.getComments(this.props.id);
     }
   }

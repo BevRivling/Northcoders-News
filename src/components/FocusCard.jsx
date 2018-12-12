@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AddCommentButton from "./AddCommentButton";
 import AddVoteButton from "./AddVoteButton";
 import CommentReel from "./CommentReel";
+import CommentForm from "./CommentForm";
 import EditArticleButton from "./EditArticleButton";
 import DeleteArticleButton from "./DeleteArticleButton";
 import * as api from "../api";
@@ -9,7 +10,9 @@ import * as api from "../api";
 class FocusCard extends Component {
   state = {
     votes: this.props.focusArticle.votes,
-    voteClicked: false
+    voteClicked: false,
+    commentFormOpen: false,
+    commentToPost: ""
   };
   render() {
     const { toggleFocus, focusArticle, addVote } = this.props;
@@ -29,9 +32,20 @@ class FocusCard extends Component {
               <span>{this.state.votes}</span>
             </div>
           </div>
-          <CommentReel id={focusArticle.article_id} />
+          {this.state.commentFormOpen ? (
+            <CommentForm
+              article_id={focusArticle.article_id}
+              postComment={this.postComment}
+            />
+          ) : (
+            <CommentReel
+              commentToPost={this.state.commentToPost}
+              id={focusArticle.article_id}
+            />
+          )}
+
           <div className="card-buttons">
-            <AddCommentButton />
+            <AddCommentButton openCommentForm={this.openCommentForm} />
             <AddVoteButton
               addVote={this.addVote}
               id={focusArticle.article_id}
@@ -53,15 +67,20 @@ class FocusCard extends Component {
       }));
     }
   };
+
+  openCommentForm = () => {
+    this.setState(prevState => ({
+      commentFormOpen: !prevState.commentFormOpen,
+      commentPosted: true
+    }));
+  };
+
+  postComment = (article_id, comment, user_id = 1) => {
+    api.postCommentByArticleId(article_id, comment, user_id);
+    this.setState(prevState => ({
+      commentFormOpen: false,
+      commentToPost: comment
+    }));
+  };
 }
-
 export default FocusCard;
-
-// const FocusCard = ({ toggleFocus, focusArticle, addVote }) => {
-//   console.log(focusArticle.article_id);
-//   return (
-
-//   );
-// };
-
-// export default FocusCard;

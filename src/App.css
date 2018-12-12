@@ -523,3 +523,16 @@ body {
   opacity: 0.8;
   user-select: none;
 }
+
+.comment-reel #post {
+  font-size: 4em;
+}
+
+.comment-reel #post:hover {
+  opacity: 0.2;
+}
+
+.comment-reel input {
+  width: 60vw;
+  opacity: 0.8;
+}

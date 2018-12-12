@@ -1,7 +1,11 @@
 import React from "react";
 
-const AddComment = () => {
-  return <button className="comment-button">+</button>;
+const AddComment = ({ openCommentForm }) => {
+  return (
+    <button onClick={() => openCommentForm()} className="comment-button">
+      +
+    </button>
+  );
 };
 
 export default AddComment;
