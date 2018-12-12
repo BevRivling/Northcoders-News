@@ -1,8 +1,8 @@
 import React from "react";
 
-const AddComment = ({ openCommentForm }) => {
+const AddComment = ({ toggleCommentForm }) => {
   return (
-    <button onClick={() => openCommentForm()} className="comment-button">
+    <button onClick={() => toggleCommentForm()} className="comment-button">
       +
     </button>
   );

@@ -37,10 +37,11 @@ export const getCommentsByArticleId = async id => {
 
 export const voteArticleById = async id => {
   const body = { inc_votes: 1 };
-  const { data } = axios.patch(`${BASE_URL}articles/${id}`, body);
+  axios.patch(`${BASE_URL}articles/${id}`, body);
 };
 
 export const postCommentByArticleId = async (id, comment, user_id = 1) => {
-  const body = { body: comment, user_id: user_id };
-  const { data } = axios.patch(`${BASE_URL}articles/${id}`, body);
+  const commentToPost = { body: comment, user_id: user_id };
+  const data = axios.post(`${BASE_URL}articles/${id}/comments`, commentToPost);
+  return data;
 };

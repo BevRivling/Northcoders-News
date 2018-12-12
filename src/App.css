@@ -536,3 +536,24 @@ body {
   width: 60vw;
   opacity: 0.8;
 }
+
+.add-article {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0px;
+  left: 0;
+  margin: auto;
+  height: 40vh;
+  width: 40vw;
+  z-index: 10;
+  background: white;
+  opacity: 0.7;
+  border: 4px rgb(66, 57, 58) solid;
+  box-shadow: 4px 4px 20px #42393a;
+  color: #1c3144;
+  transition: 500ms;
+}

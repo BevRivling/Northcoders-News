@@ -36,7 +36,7 @@ class App extends Component {
             topicSlug={this.state.topicSlug}
           />
         </Router>
-        <SideFooter />
+        <SideFooter topics={this.state.topics} />
         <Focus />
       </div>
     );

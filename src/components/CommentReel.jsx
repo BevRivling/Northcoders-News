@@ -4,34 +4,67 @@ import * as api from "../api";
 
 class CommentReel extends Component {
   state = {
+    formOpen: false,
     comments: [{ author: "", votes: 0, body: "" }],
-    currentComment: 0
+    currentComment: 0,
+    comment: ""
   };
 
   render() {
-    return (
-      <div className="wrapper">
-        <div className="comment-reel">
-          <button onClick={() => this.changeComment("previous")}>&lt;</button>
-          <CommentCard
-            comment={this.state.comments[this.state.currentComment]}
-          />
+    if (!this.state.formOpen) {
+      return (
+        <div className="wrapper">
+          <div className="comment-reel">
+            <button onClick={() => this.changeComment("previous")}>&lt;</button>
+            <CommentCard
+              comment={this.state.comments[this.state.currentComment]}
+            />
 
-          <button onClick={() => this.changeComment("next")}>&gt;</button>
+            <button onClick={() => this.changeComment("next")}>&gt;</button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="wrapper">
+          <form className="comment-reel comment-form">
+            <input onChange={this.handleChange} type="text" />
+            <button onClick={this.handleSubmit} type="submit" id="post">
+              POST
+            </button>
+          </form>
+        </div>
+      );
+    }
   }
+
+  handleChange = e => {
+    const { value } = e.target;
+    this.setState(prevState => {
+      return {
+        comment: value
+      };
+    });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    const finalComment = this.state.comment;
+    this.postComment(this.props.article_id, finalComment);
+    //
+  };
 
   componentDidMount() {
     this.getComments(this.props.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.currentComment !== prevState.currentComment) {
+    if (this.state !== prevState) {
       this.getComments(this.props.id);
     }
-    if (this.props.commentToPost !== prevProps.commentToPost) {
+    if (this.props !== prevProps) {
+      this.setState(prevState => ({
+        formOpen: this.props.formOpen
+      }));
       this.getComments(this.props.id);
     }
   }
@@ -56,6 +89,14 @@ class CommentReel extends Component {
         currentComment: increment
       };
     });
+  };
+
+  postComment = (article_id, comment, user_id = 1) => {
+    api.postCommentByArticleId(article_id, comment, user_id).then(console.log);
+    this.setState(prevState => ({
+      // currentComment: prevState.currentComment.length - 1,
+      formOpen: false
+    }));
   };
 }
 
