@@ -4,6 +4,11 @@ import { Link } from "@reach/router";
 const Nav = ({ topics, toggleNav, chooseTopic }) => {
   const navLinks = (
     <ul className="nav-links">
+      <Link key="-1" to="/">
+        <li key="home" onClick={() => chooseTopic("")}>
+          home
+        </li>
+      </Link>
       <Link key="0" to="/articles/all">
         <li key="all" onClick={() => chooseTopic("all")}>
           all

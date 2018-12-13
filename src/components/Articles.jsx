@@ -7,6 +7,7 @@ import Loading from "./Loading";
 class Articles extends Component {
   state = {
     articles: [],
+    nextArticles: [],
     isLoaded: false,
     focusArticle: {},
     isFocused: false

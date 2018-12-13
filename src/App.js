@@ -31,6 +31,7 @@ class App extends Component {
             topics={this.state.topics}
           />
           <Router>
+            <Articles topic="" path="/" />
             <Articles
               orderBy={this.state.orderBy}
               user={this.state.username}
