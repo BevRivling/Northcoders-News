@@ -11,15 +11,16 @@ import { Router } from "@reach/router";
 class App extends Component {
   state = {
     topicSlug: "all",
-    articles: [],
     topics: [],
     passwordCorrect: true,
     usernameCorrect: true,
     user: "",
     toggleNav: false,
-    loggedIn: false
+    loggedIn: true,
+    orderBy: ""
   };
   render() {
+    console.log(this.state);
     if (this.state.loggedIn) {
       return (
         <div className="App">
@@ -31,19 +32,22 @@ class App extends Component {
           />
           <Router>
             <Articles
+              orderBy={this.state.orderBy}
               user={this.state.username}
               path="/articles/all"
-              articles={this.state.articles}
-              topicSlug={this.state.topicSlug}
+              topic="all"
             />
             <Articles
+              orderBy={this.state.orderBy}
               user={this.state.username}
               path="/articles/:topic"
-              articles={this.state.articles}
-              topicSlug={this.state.topicSlug}
             />
           </Router>
-          <SideFooter user={this.state.username} topics={this.state.topics} />
+          <SideFooter
+            changeOrder={this.changeOrder}
+            user={this.state.username}
+            topics={this.state.topics}
+          />
         </div>
       );
     } else {
@@ -86,6 +90,11 @@ class App extends Component {
 
   chooseTopic = topic => {
     this.setState({ topicSlug: topic });
+  };
+
+  changeOrder = (e, orderBy) => {
+    e.preventDefault();
+    this.setState({ orderBy });
   };
 
   getNav = () => {

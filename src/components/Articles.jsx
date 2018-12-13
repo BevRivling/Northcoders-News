@@ -56,7 +56,7 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props !== prevProps) {
-      this.getArticles(this.props.topicSlug);
+      this.getArticles(this.props.topic);
     }
     if (this.state.focusArticle !== prevState.focusArticle) {
       this.toggleFocus(this.state.focusArticle);
@@ -70,7 +70,9 @@ class Articles extends Component {
   };
 
   getArticles = slug => {
-    api.getArticles(slug).then(articles => {
+    const { orderBy } = this.props;
+    console.log(this.props);
+    api.getArticles(slug, orderBy).then(articles => {
       if (this.state.isLoaded) this.setState({ articles: articles });
       else {
         // Sorry - this is just to show off my loading icon

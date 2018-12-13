@@ -8,17 +8,24 @@ export const getTopics = async () => {
   return topics;
 };
 
-export const getArticles = async slug => {
+export const getArticles = async (slug, queries) => {
+  console.log(queries);
+  let query;
+  if (queries === "alphabetically") query = "sort_by=title&sort_ascending=true";
+  if (queries === "date") query = "sort_by=created_at&sort_ascending=true";
+  if (queries === "popularity") query = "sort_by=votes&sort_ascending=true";
+  else query = "";
+  console.log(query);
   if (slug === "") return [];
   if (slug === "all") {
     const {
       data: { articles }
-    } = await axios.get(`${BASE_URL}articles`);
+    } = await axios.get(`${BASE_URL}articles?${query}`);
     return articles;
   } else {
     const {
       data: { msg }
-    } = await axios.get(`${BASE_URL}topics/${slug}/articles`);
+    } = await axios.get(`${BASE_URL}topics/${slug}/articles?${query}`);
     return msg;
   }
 };

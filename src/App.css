@@ -678,6 +678,7 @@ body {
   display: flex;
   flex-direction: column;
   position: absolute;
+  align-items: center;
   margin: auto;
   top: 0;
   right: 0;
@@ -693,4 +694,22 @@ body {
   box-shadow: 4px 4px 20px #42393a;
   color: #1c3144;
   transition: 500ms;
+}
+
+.sett-butts {
+  text-align: center;
+  /* width: 30px; */
+  margin: auto;
+  border: #596f62;
+  flex-grow: 1;
+  margin: 20px;
+  margin-top: 0;
+  padding: 10px;
+  display: inline;
+}
+
+.sett-butts:hover {
+  cursor: pointer;
+  background: rgba(94, 158, 60, 0.5);
+  transition: 400ms;
 }

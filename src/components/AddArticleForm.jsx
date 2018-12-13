@@ -8,7 +8,6 @@ class AddArticleForm extends Component {
     body: ""
   };
   render() {
-    console.log(this.props);
     return (
       <div
         className={`${

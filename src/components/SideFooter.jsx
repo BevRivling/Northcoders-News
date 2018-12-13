@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import cog from "../img/cog.svg";
 import AddArticleForm from "./AddArticleForm";
+import SettingsForm from "./SettingsForm";
 
 class SideFooter extends Component {
   state = {
@@ -9,7 +10,6 @@ class SideFooter extends Component {
   };
 
   render() {
-    console.log(this.props);
     let focalPanel;
     if (this.state.isFocused && this.state.focalPanel === "newArticle") {
       focalPanel = (
@@ -24,6 +24,19 @@ class SideFooter extends Component {
         </React.Fragment>
       );
     }
+
+    if (this.state.isFocused && this.state.focalPanel === "chooseSettings") {
+      focalPanel = (
+        <React.Fragment>
+          <div className="grey-background" onClick={() => this.toggleFocus()} />
+          <SettingsForm
+            changeOrder={this.props.changeOrder}
+            focus={this.state.focalPanel}
+          />
+        </React.Fragment>
+      );
+    }
+
     return (
       <div className="side-footer">
         {focalPanel}
@@ -37,7 +50,7 @@ class SideFooter extends Component {
         </div>
         <div
           onClick={() => {
-            this.toggleFocus();
+            this.toggleFocus("chooseSettings");
           }}
           id="settings"
         >
