@@ -20,7 +20,6 @@ class App extends Component {
     orderBy: ""
   };
   render() {
-    console.log(this.state);
     if (this.state.loggedIn) {
       return (
         <div className="App">
@@ -31,14 +30,16 @@ class App extends Component {
             topics={this.state.topics}
           />
           <Router>
-            <Articles topic="" path="/" />
+            <Articles resetOrder={this.resetOrder} topic="" path="/" />
             <Articles
+              resetOrder={this.resetOrder}
               orderBy={this.state.orderBy}
               user={this.state.username}
               path="/articles/all"
               topic="all"
             />
             <Articles
+              resetOrder={this.resetOrder}
               orderBy={this.state.orderBy}
               user={this.state.username}
               path="/articles/:topic"
@@ -67,6 +68,10 @@ class App extends Component {
   componentDidMount() {
     this.getNav();
   }
+
+  resetOrder = () => {
+    this.setState({ orderBy: "" });
+  };
 
   attemptLogin = details => {
     api.getUsers().then(usersArr => {
