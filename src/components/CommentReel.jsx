@@ -4,6 +4,7 @@ import * as api from "../api";
 
 class CommentReel extends Component {
   state = {
+    commentPosted: false,
     formOpen: false,
     comments: [{ author: "", votes: 0, body: "" }],
     currentComment: 0,
@@ -17,6 +18,8 @@ class CommentReel extends Component {
           <div className="comment-reel">
             <button onClick={() => this.changeComment("previous")}>&lt;</button>
             <CommentCard
+              deleteComment={this.deleteComment}
+              voteComment={this.voteComment}
               comment={this.state.comments[this.state.currentComment]}
             />
 
@@ -58,7 +61,7 @@ class CommentReel extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state !== prevState) {
+    if (this.state.commentPosted !== prevState.commentPosted) {
       this.getComments(this.props.id);
     }
     if (this.props !== prevProps) {
@@ -72,7 +75,8 @@ class CommentReel extends Component {
   getComments = id => {
     api.getCommentsByArticleId(id).then(comments => {
       this.setState({
-        comments
+        comments: comments,
+        commentPosted: true
       });
     });
   };
@@ -91,11 +95,37 @@ class CommentReel extends Component {
     });
   };
 
+  voteComment = commentId => {
+    if (!this.state.voteClicked) {
+      api.voteCommentById(commentId);
+      this.setState(prevState => ({
+        ...this.state,
+        comments: [
+          ...this.state.comments,
+          (this.state.comments[this.state.currentComment].votes += 1)
+        ]
+      }));
+    }
+  };
+
+  deleteComment = commentId => {
+    api.deleteCommentById(commentId);
+    const newComments = this.state.comments.filter(
+      comment => comment.comments_id !== commentId
+    );
+    console.log(newComments.length, this.state.comments.length);
+    this.setState({
+      comments: newComments
+      // commentPosted: false
+    });
+  };
+
   postComment = (article_id, comment, user_id = 1) => {
     api.postCommentByArticleId(article_id, comment, user_id).then(console.log);
     this.setState(prevState => ({
       // currentComment: prevState.currentComment.length - 1,
-      formOpen: false
+      formOpen: false,
+      commentPosted: false
     }));
   };
 }

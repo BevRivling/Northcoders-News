@@ -4,13 +4,15 @@ import AddVoteButton from "./AddVoteButton";
 import CommentReel from "./CommentReel";
 import EditArticleButton from "./EditArticleButton";
 import DeleteArticleButton from "./DeleteArticleButton";
+import DeleteOptions from "./DeleteOptions";
 import * as api from "../api";
 
 class FocusCard extends Component {
   state = {
     votes: this.props.focusArticle.votes,
     voteClicked: false,
-    commentFormOpen: false
+    commentFormOpen: false,
+    deleteOptionsOpen: false
   };
   render() {
     const { toggleFocus, focusArticle } = this.props;
@@ -44,7 +46,16 @@ class FocusCard extends Component {
               id={focusArticle.article_id}
             />
             <EditArticleButton />
-            <DeleteArticleButton />
+            <DeleteArticleButton
+              toggleDelete={this.toggleDelete}
+              deleteOptionsOpen={this.state.deleteOptionsOpen}
+            />
+            <DeleteOptions
+              article_id={focusArticle.article_id}
+              toggleDelete={this.toggleDelete}
+              deleteArticleOrComment={this.deleteArticleOrComment}
+              deleteOptionsOpen={this.state.deleteOptionsOpen}
+            />
           </div>
         </div>
       </React.Fragment>
@@ -61,12 +72,29 @@ class FocusCard extends Component {
     }
   };
 
+  deleteArticleOrComment = (articleOrComment, id) => {
+    if (articleOrComment === "article") {
+      this.props.toggleFocus();
+      api.deleteArticleById(id).then(article => {
+        alert(`You have deleted article "${id}"`);
+      });
+    }
+    if (articleOrComment === "comment") {
+      api.deleteCommentById(id);
+    }
+  };
+
+  toggleDelete = () => {
+    console.log(this.state);
+    this.setState(prevState => ({
+      deleteOptionsOpen: !prevState.deleteOptionsOpen
+    }));
+  };
+
   toggleCommentForm = () => {
-    this.setState(prevState => {
-      return {
-        commentFormOpen: !prevState.commentFormOpen
-      };
-    });
+    this.setState(prevState => ({
+      commentFormOpen: !prevState.commentFormOpen
+    }));
   };
 }
 export default FocusCard;

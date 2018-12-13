@@ -7,13 +7,17 @@ class SideFooter extends Component {
     isFocused: false,
     focalPanel: ""
   };
+
   render() {
+    console.log(this.props);
     let focalPanel;
     if (this.state.isFocused && this.state.focalPanel === "newArticle") {
       focalPanel = (
         <React.Fragment>
           <div className="grey-background" onClick={() => this.toggleFocus()} />
           <AddArticleForm
+            user={this.props.user}
+            toggleFocus={this.toggleFocus}
             topics={this.props.topics}
             focus={this.state.focalPanel}
           />

@@ -138,6 +138,73 @@ body {
   display: none;
 }
 
+/* Login */
+.login {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 55vh;
+  width: 25vw;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.644);
+  border: 2px solid #1c3144;
+  box-shadow: 0 0 20px #42393a;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin: auto;
+  align-items: center;
+  padding: 20px;
+}
+#login-logo {
+  min-width: 150px;
+  min-height: 150px;
+  max-width: 150px;
+  max-height: 150px;
+  padding: 20px;
+  border-radius: 100%;
+  /* position: absolute; */
+  flex-grow: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0;
+  box-shadow: 0 0 20px #42393a;
+}
+
+#login-form {
+  margin: 30px;
+  flex-grow: 6;
+}
+
+#login-form label {
+  display: block;
+}
+
+#login-form input {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+#login-form button {
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: rgba(94, 158, 60, 0.8);
+  border: none;
+}
+#login-form button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+  box-shadow: 0 0 5px #42393a;
+}
+
+.form-error {
+  color: #bc0531;
+  font-size: 0.7em;
+}
+
 /* Loader */
 .main #loading {
   display: flex-grow;
@@ -348,6 +415,7 @@ body {
 }
 
 .vote {
+  outline: none;
   border: none;
   display: flex;
   justify-content: center;
@@ -379,6 +447,7 @@ body {
 }
 
 .comment-button {
+  outline: none;
   border: none;
   background: #5e9e3c;
   display: flex;
@@ -408,6 +477,7 @@ body {
 }
 
 .edit-button {
+  outline: none;
   border: none;
   background: #1c3144;
   display: flex;
@@ -444,6 +514,7 @@ body {
 }
 
 .delete-button {
+  outline: none;
   border: none;
   background: white;
   display: flex;
@@ -466,11 +537,47 @@ body {
   transition: 500ms;
 }
 
+.delete-button.open {
+  transform: rotate(-90deg);
+  transition: 500ms;
+}
+
 .delete-button:hover {
   cursor: pointer;
   opacity: 1;
   transform: rotate(180deg);
   transition: 500ms;
+}
+.options-container {
+  width: 8vw;
+  height: 3vh;
+}
+.delete-options {
+  width: 8vw;
+  height: 3vh;
+  background-color: rgba(201, 183, 23, 0.6);
+  border: 2px solid rgb(201, 183, 23);
+  margin: 3px;
+  transition: 300ms;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  color: white;
+  font-size: 1em;
+}
+
+.delete-options:hover {
+  opacity: 0.5;
+}
+
+.delete-options.closed {
+  display: none;
+  transform: translateX(-100px);
+}
+
+.delete-options.open {
+  display: flex;
+  /* transform: translateX(100px); */
 }
 
 .focus-card h5 {
@@ -497,7 +604,7 @@ body {
 }
 .comment-card {
   flex: 1;
-  height: 100px;
+  height: 150px;
   color: white;
   font-size: 1.3em;
   user-select: none;
@@ -513,6 +620,7 @@ body {
   display: none;
 }
 .comment-reel button {
+  outline: none;
   width: 50px;
   margin: 20px;
   background-color: transparent;
@@ -522,6 +630,35 @@ body {
   cursor: pointer;
   opacity: 0.8;
   user-select: none;
+}
+
+.comm-deets {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+}
+.comm-stats {
+  margin: 5px;
+  flex-grow: 8;
+}
+
+.comm-butts {
+  text-align: center;
+  width: 30px;
+  margin: 5px;
+  border: #596f62;
+  flex-grow: 1;
+}
+
+.comm-auth {
+  margin: 5px;
+  margin-top: 0;
+  padding: 10px;
+}
+.comm-butts .comm-auth:hover {
+  cursor: pointer;
+  background: rgba(94, 158, 60, 0.5);
+  transition: 400ms;
 }
 
 .comment-reel #post {

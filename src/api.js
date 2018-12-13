@@ -42,6 +42,41 @@ export const voteArticleById = async id => {
 
 export const postCommentByArticleId = async (id, comment, user_id = 1) => {
   const commentToPost = { body: comment, user_id: user_id };
-  const data = axios.post(`${BASE_URL}articles/${id}/comments`, commentToPost);
+  const data = await axios.post(
+    `${BASE_URL}articles/${id}/comments`,
+    commentToPost
+  );
   return data;
+};
+
+export const postArticleByTopicSlug = async (article, topicSlug) => {
+  console.log(article);
+  const data = await axios.post(
+    `${BASE_URL}topics/${topicSlug}/articles`,
+    article
+  );
+  return data;
+};
+
+export const deleteArticleById = async article_id => {
+  const data = await axios.delete(`${BASE_URL}/articles/${article_id}`);
+  return data;
+};
+
+export const voteCommentById = async comment_id => {
+  const body = { inc_votes: 1 };
+  const data = await axios.patch(`${BASE_URL}comments/${comment_id}`, body);
+  return data;
+};
+
+export const deleteCommentById = async comment_id => {
+  console.log("deleting comment: ", comment_id);
+  const data = await axios.delete(`${BASE_URL}comments/${comment_id}`);
+};
+
+export const getUsers = async () => {
+  const {
+    data: { users }
+  } = await axios.get(`${BASE_URL}/users`);
+  return users;
 };
