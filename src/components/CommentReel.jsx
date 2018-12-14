@@ -74,10 +74,12 @@ class CommentReel extends Component {
 
   getComments = id => {
     api.getCommentsByArticleId(id).then(comments => {
-      this.setState({
-        comments: comments,
-        commentPosted: true
-      });
+      if (comments[0].comments_id) {
+        this.setState({
+          comments: comments,
+          commentPosted: true
+        });
+      }
     });
   };
 
@@ -102,7 +104,7 @@ class CommentReel extends Component {
         ...this.state,
         comments: [
           ...this.state.comments,
-          (this.state.comments[this.state.currentComment].votes += 1)
+          (prevState.comments[this.state.currentComment].votes += 1)
         ]
       }));
     }

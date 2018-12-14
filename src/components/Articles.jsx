@@ -53,6 +53,7 @@ class Articles extends Component {
   }
 
   componentDidMount() {
+    this.props.resetOrder();
     this.getArticles(this.props.topic);
   }
 
@@ -61,7 +62,8 @@ class Articles extends Component {
       this.getArticles(this.props.topic);
     }
     if (this.props.topic !== prevProps.topic) {
-      this.resetPage();
+      this.props.resetOrder();
+      this.getArticles(this.props.topic);
     }
     if (this.state.focusArticle !== prevState.focusArticle) {
       this.toggleFocus(this.state.focusArticle);
@@ -76,24 +78,43 @@ class Articles extends Component {
 
   getArticles = slug => {
     const { orderBy } = this.props;
-    const { page } = this.state;
-    Promise.all([
-      api.getArticles(slug, orderBy),
-      api.getArticles(slug, orderBy, page + 1)
-    ]).then(data => {
-      if (this.state.isLoaded)
+    api.getArticles(slug, orderBy).then(data => {
+      if (this.state.isLoaded) {
         this.setState(prevState => ({
-          articles: data[0],
-          nextArticles: data[1]
+          articles: data
         }));
-      else {
+      } else {
         // Sorry - this is just to show off my loading icon
         setTimeout(() => {
-          this.setState({ articles: data[0], isLoaded: true });
-        }, 1000);
+          this.setState({ articles: data, isLoaded: true });
+        }, 3000);
       }
     });
   };
+
+  // // An attempt at infinite Scroll Pagination
+  // getArticles = slug => {
+  //   const { orderBy } = this.props;
+  //   const { page } = this.state;
+  //   Promise.all([
+  //     api.getArticles(slug, orderBy),
+  //     api.getArticles(slug, orderBy, page + 1)
+  //   ]).then(data => {
+  //     console.log("got two article arrays!");
+  //     if (this.state.isLoaded) {
+  //       this.setState(prevState => ({
+  //         articles: data[0],
+  //         nextArticles: data[1],
+  //         page: (prevState.page += 1)
+  //       }));
+  //     } else {
+  //       // Sorry - this is just to show off my loading icon
+  //       setTimeout(() => {
+  //         this.setState({ articles: data[0], isLoaded: true });
+  //       }, 1000);
+  //     }
+  //   });
+  // };
 
   loadNextPage = () => {
     let newPage = this.state.articles;
@@ -104,11 +125,6 @@ class Articles extends Component {
     }));
   };
 
-  resetPage = () => {
-    this.props.resetOrder();
-    this.setState({ page: 1 }, this.getArticles(this.props.topic));
-  };
-
   getArticleById = id => {
     api.getArticleById(id).then(article => {
       this.setState({ focusArticle: article });
@@ -116,19 +132,19 @@ class Articles extends Component {
   };
 
   handleScroll = e => {
-    const { scrollHeight, clientHeight, scrollTop } = e.target;
-    if (
-      clientHeight + scrollTop + 50 >= scrollHeight &&
-      this.state.isLoaded &&
-      this.state.nextArticles.length > 0
-    ) {
-      this.setState(
-        prevState => ({ page: (prevState.page += 1) }),
-        () => {
-          this.loadNextPage();
-        }
-      );
-    }
+    //   const { scrollHeight, clientHeight, scrollTop } = e.target;
+    //   if (
+    //     clientHeight + scrollTop + 50 >= scrollHeight &&
+    //     this.state.isLoaded &&
+    //     this.state.nextArticles.length > 0
+    //   ) {
+    //     this.setState(
+    //       prevState => ({ page: (prevState.page += 1) }),
+    //       () => {
+    //         this.loadNextPage();
+    //       }
+    //     );
+    //   }
   };
 }
 

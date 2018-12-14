@@ -1,4 +1,5 @@
 import axios from "axios";
+import { navigate } from "@reach/router/lib/history";
 const BASE_URL = "https://saucy-mendicant.herokuapp.com/api/";
 
 export const getTopics = async () => {
@@ -17,27 +18,35 @@ export const getArticles = async (slug, queries, page = 1) => {
   if (slug === "all") {
     const {
       data: { articles }
-    } = await axios.get(`${BASE_URL}articles?${query}&p=${page}`);
+    } = await axios.get(`${BASE_URL}articles?${query}&p=${page}`).catch(err => {
+      navigate("/404");
+    });
     return articles;
   } else {
     const {
       data: { msg }
-    } = await axios.get(
-      `${BASE_URL}topics/${slug}/articles?${query}&p=${page}`
-    );
+    } = await axios
+      .get(`${BASE_URL}topics/${slug}/articles?${query}&p=${page}`)
+      .catch(err => {
+        navigate("/404");
+      });
     return msg;
   }
 };
 
 export const getArticleById = async id => {
-  const { data } = await axios.get(`${BASE_URL}articles/${id}`);
+  const { data } = await axios.get(`${BASE_URL}articles/${id}`).catch(err => {
+    navigate("/404");
+  });
   return data;
 };
 
 export const getCommentsByArticleId = async id => {
   const {
     data: { comments }
-  } = await axios.get(`${BASE_URL}articles/${id}/comments`);
+  } = await axios.get(`${BASE_URL}articles/${id}/comments`).catch(err => {
+    navigate("/404");
+  });
   return comments;
 };
 

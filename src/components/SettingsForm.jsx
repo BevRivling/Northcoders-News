@@ -34,7 +34,7 @@ const SettingsForm = ({ focus, changeOrder, logOut }) => {
         Log Out?
         <br />
         <button onClick={() => logOut()} className="log-out">
-          <img src={user} id="log-out-button" />
+          <img src={user} alt="logout" id="log-out-button" />
         </button>
       </label>
     </div>

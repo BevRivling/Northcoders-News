@@ -5,6 +5,7 @@ import Articles from "./components/Articles";
 import SideFooter from "./components/SideFooter";
 import Nav from "./components/Nav";
 import Auth from "./components/Auth";
+import NotFound from "./components/NotFound";
 import * as api from "./api";
 import { Router } from "@reach/router";
 
@@ -29,6 +30,7 @@ class App extends Component {
             topics={this.state.topics}
           />
           <Router>
+            <NotFound path="/404" />
             <Articles resetOrder={this.resetOrder} topic="" path="/" />
             <Articles
               resetOrder={this.resetOrder}
@@ -83,6 +85,7 @@ class App extends Component {
             passwordCorrect: false
           });
           if (details.password !== "") {
+            localStorage.setItem("user", this.state.user);
             localStorage.setItem("loggedIn", true);
             this.setState({ passwordCorrect: true });
           } else {
@@ -98,6 +101,7 @@ class App extends Component {
   logOut = () => {
     this.setState({ user: "" });
     localStorage.setItem("loggedIn", false);
+    localStorage.setItem("user", "");
   };
 
   toggleNav = () => {

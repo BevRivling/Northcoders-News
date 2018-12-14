@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import { navigate } from "@reach/router";
 
 class AddArticleForm extends Component {
   state = {
@@ -77,13 +78,16 @@ class AddArticleForm extends Component {
       title: this.state.title,
       topic: this.state.topic,
       body: this.state.body,
-      created_by: this.props.user,
+      created_by: localStorage.user,
       created_at: Date.now()
     };
+
     if (!article.title || !article.topic || !article.body) {
       alert(
         "Please fill out all of the input fields before posting a new topic."
       );
+    } else if (!article.created_by) {
+      alert("Make sure you are signed in!");
     } else {
       this.postArticle(article);
     }
@@ -93,10 +97,9 @@ class AddArticleForm extends Component {
     api
       .postArticleByTopicSlug(article, this.state.topic)
       .then(postedArticle => {
-        // console.log(postedArticle);
         alert(`${postedArticle.data.title} has been successfully posted`);
         this.props.toggleFocus("");
-        window.location.reload();
+        navigate(`/articles/${postedArticle.data.topic}`);
       });
   };
 }
