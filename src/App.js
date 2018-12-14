@@ -20,7 +20,7 @@ class App extends Component {
     orderBy: ""
   };
   render() {
-    if (JSON.parse(localStorage.loggedIn)) {
+    if (JSON.parse(localStorage.getItem("loggedIn"))) {
       return (
         <div className="App">
           <Header toggleNav={this.toggleNav} colours={this.state.toggleNav} />
@@ -101,7 +101,7 @@ class App extends Component {
   logOut = () => {
     this.setState({ user: "" });
     localStorage.setItem("loggedIn", false);
-    localStorage.setItem("user", "");
+    localStorage.removeItem("user");
   };
 
   toggleNav = () => {
