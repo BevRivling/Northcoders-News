@@ -6,7 +6,7 @@ class CommentReel extends Component {
   state = {
     commentPosted: false,
     formOpen: false,
-    comments: [{ author: "", votes: 0, body: "" }],
+    comments: [],
     currentComment: 0,
     comment: ""
   };

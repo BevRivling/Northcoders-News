@@ -1,6 +1,7 @@
 import React from "react";
+import user from "../img/user.png";
 
-const SettingsForm = ({ focus, changeOrder }) => {
+const SettingsForm = ({ focus, changeOrder, logOut }) => {
   return (
     <div
       className={`${
@@ -8,9 +9,10 @@ const SettingsForm = ({ focus, changeOrder }) => {
       }`}
     >
       <h4>Settings</h4>
-      <form>
+      <form className="settings-form">
         <label>
-          Sort By:
+          Sort By
+          <br />
           <button className="sett-butts" onClick={e => changeOrder(e, "date")}>
             Date
           </button>
@@ -28,6 +30,13 @@ const SettingsForm = ({ focus, changeOrder }) => {
           </button>
         </label>
       </form>
+      <label className="log-out-label">
+        Log Out?
+        <br />
+        <button onClick={() => logOut()} className="log-out">
+          <img src={user} id="log-out-button" />
+        </button>
+      </label>
     </div>
   );
 };

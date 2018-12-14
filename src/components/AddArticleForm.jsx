@@ -17,15 +17,18 @@ class AddArticleForm extends Component {
         }`}
       >
         <h4>Post New Article</h4>
+
         <form>
           <label>
             Title:
             <input type="text" onChange={this.handleTitle} />
           </label>
+          <br />
           <label>
             Body:
             <textarea onChange={this.handleBody} rows="10" cols="45" />
           </label>
+          <br />
           <label>
             Topic:
             <select value={this.state.topic} onChange={this.handleTopic}>
@@ -77,16 +80,23 @@ class AddArticleForm extends Component {
       created_by: this.props.user,
       created_at: Date.now()
     };
-    this.postArticle(article);
+    if (!article.title || !article.topic || !article.body) {
+      alert(
+        "Please fill out all of the input fields before posting a new topic."
+      );
+    } else {
+      this.postArticle(article);
+    }
   };
 
   postArticle = article => {
     api
       .postArticleByTopicSlug(article, this.state.topic)
       .then(postedArticle => {
-        console.log(postedArticle);
-        alert(`${postedArticle.title} has been successfully posted`);
+        // console.log(postedArticle);
+        alert(`${postedArticle.data.title} has been successfully posted`);
         this.props.toggleFocus("");
+        window.location.reload();
       });
   };
 }

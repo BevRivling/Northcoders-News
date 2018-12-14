@@ -399,10 +399,10 @@ body {
   margin: 30px;
   margin-left: 50px;
   flex-grow: 1;
-  min-width: 350px;
-  max-width: 350px;
-  min-height: 350px;
-  max-height: 350px;
+  min-width: 40vh;
+  max-width: 40vh;
+  min-height: 40vh;
+  max-height: 40vh;
   background-color: rgba(201, 183, 23, 0.6);
   border: 2px solid rgb(201, 183, 23);
 }
@@ -606,7 +606,7 @@ body {
   flex: 1;
   height: 150px;
   color: white;
-  font-size: 1.3em;
+  font-size: 1.1em;
   user-select: none;
   overflow: auto;
   text-align: right;
@@ -685,7 +685,7 @@ body {
   bottom: 0px;
   left: 0;
   margin: auto;
-  height: 40vh;
+  height: 50vh;
   width: 40vw;
   z-index: 10;
   background: white;
@@ -696,7 +696,20 @@ body {
   transition: 500ms;
 }
 
-.sett-butts {
+.add-article input {
+  margin: 15px;
+}
+
+.add-article textarea {
+  margin: 15px;
+}
+
+.add-article select {
+  border: #596f62;
+  margin: 15px;
+}
+
+.add-article button {
   text-align: center;
   /* width: 30px; */
   margin: auto;
@@ -708,8 +721,41 @@ body {
   display: inline;
 }
 
+.add-article button:hover {
+  cursor: pointer;
+  background: rgba(94, 158, 60, 0.5);
+  transition: 400ms;
+}
+
+button.sett-butts {
+  text-align: center;
+  margin: auto;
+  border: #596f62;
+  flex-grow: 1;
+  margin-top: 20px;
+  margin: 20px;
+  padding: 10px;
+  display: inline;
+}
+
+.settings-form {
+  margin-top: 30px;
+}
+
 .sett-butts:hover {
   cursor: pointer;
   background: rgba(94, 158, 60, 0.5);
   transition: 400ms;
+}
+
+.log-out-label {
+  margin: 50px;
+}
+
+button.log-out {
+  border-radius: 100%;
+  margin-top: 20px;
+}
+#log-out-button {
+  height: 50px;
 }

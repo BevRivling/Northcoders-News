@@ -12,13 +12,18 @@ class Auth extends Component {
     const userValidation = usernameCorrect ? (
       <p />
     ) : (
-      <p class="form-error">Please insert a valid username.</p>
+      <React.Fragment>
+        <p className="form-error">Please insert a valid username.</p>
+        <p className="form-error">
+          Have you considered 'happyamy2016', 'cooljmessy', or 'weegembump'?
+        </p>
+      </React.Fragment>
     );
 
     const passValidation = passwordCorrect ? (
       <p />
     ) : (
-      <p class="form-error">Please insert a password.</p>
+      <p className="form-error">Please insert a password.</p>
     );
 
     return (

@@ -3,7 +3,6 @@ import ArticleCard from "./ArticleCard";
 import FocusCard from "./FocusCard";
 import * as api from "../api";
 import Loading from "./Loading";
-import { Router } from "@reach/router";
 
 class Articles extends Component {
   state = {
@@ -17,7 +16,6 @@ class Articles extends Component {
 
   render() {
     let content;
-    console.log("State at article render: ", this.state);
     if (this.state.isLoaded) {
       content = (
         <ul onScroll={this.handleScroll} className="articles-list">
@@ -29,12 +27,7 @@ class Articles extends Component {
                   this.getArticleById(article.article_id);
                 }}
               >
-                {/* <Router> */}
-                <ArticleCard
-                  // path={`/:${article.article_id}`}
-                  articleInfo={article}
-                />
-                {/* </Router> */}
+                <ArticleCard articleInfo={article} />
               </li>
             );
           })}

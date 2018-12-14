@@ -78,6 +78,7 @@ export const voteCommentById = async comment_id => {
 export const deleteCommentById = async comment_id => {
   console.log("deleting comment: ", comment_id);
   const data = await axios.delete(`${BASE_URL}comments/${comment_id}`);
+  return data;
 };
 
 export const getUsers = async () => {

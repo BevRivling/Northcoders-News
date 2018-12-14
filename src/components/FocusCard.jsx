@@ -77,6 +77,7 @@ class FocusCard extends Component {
       this.props.toggleFocus();
       api.deleteArticleById(id).then(article => {
         alert(`You have deleted article "${id}"`);
+        window.location.reload();
       });
     }
     if (articleOrComment === "comment") {
@@ -85,7 +86,6 @@ class FocusCard extends Component {
   };
 
   toggleDelete = () => {
-    console.log(this.state);
     this.setState(prevState => ({
       deleteOptionsOpen: !prevState.deleteOptionsOpen
     }));

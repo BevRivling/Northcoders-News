@@ -16,11 +16,10 @@ class App extends Component {
     usernameCorrect: true,
     user: "",
     toggleNav: false,
-    loggedIn: true,
     orderBy: ""
   };
   render() {
-    if (this.state.loggedIn) {
+    if (JSON.parse(localStorage.loggedIn)) {
       return (
         <div className="App">
           <Header toggleNav={this.toggleNav} colours={this.state.toggleNav} />
@@ -46,8 +45,9 @@ class App extends Component {
             />
           </Router>
           <SideFooter
+            logOut={this.logOut}
             changeOrder={this.changeOrder}
-            user={this.state.username}
+            user={this.state.user}
             topics={this.state.topics}
           />
         </div>
@@ -77,15 +77,27 @@ class App extends Component {
     api.getUsers().then(usersArr => {
       usersArr.forEach(user => {
         if (user.username === details.username) {
-          this.setState({ user: user.username });
-          if (details.password === "") {
+          this.setState({
+            user: user.username,
+            usernameCorrect: true,
+            passwordCorrect: false
+          });
+          if (details.password !== "") {
+            localStorage.setItem("loggedIn", true);
+            this.setState({ passwordCorrect: true });
+          } else {
             this.setState({ passwordCorrect: false });
-          } else this.setState({ loggedIn: true, passwordCorrect: true });
+          }
         } else {
-          this.setState({ usernameCorrect: false, passwordCorrect: true });
+          this.setState({ usernameCorrect: false });
         }
       });
     });
+  };
+
+  logOut = () => {
+    this.setState({ user: "" });
+    localStorage.setItem("loggedIn", false);
   };
 
   toggleNav = () => {

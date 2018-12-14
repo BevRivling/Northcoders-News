@@ -30,6 +30,7 @@ class SideFooter extends Component {
         <React.Fragment>
           <div className="grey-background" onClick={() => this.toggleFocus()} />
           <SettingsForm
+            logOut={this.props.logOut}
             changeOrder={this.props.changeOrder}
             focus={this.state.focalPanel}
           />
