@@ -39,7 +39,7 @@ class App extends Component {
               path="/articles/all"
               topic="all"
             />
-            <Articles
+            <Arti
               resetOrder={this.resetOrder}
               orderBy={this.state.orderBy}
               user={this.state.username}

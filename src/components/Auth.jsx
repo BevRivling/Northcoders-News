@@ -3,8 +3,8 @@ import redLogo from "../img/nc-logo.png";
 
 class Auth extends Component {
   state = {
-    username: "",
-    password: ""
+    username: "happyamy2016",
+    password: "test"
   };
 
   render() {

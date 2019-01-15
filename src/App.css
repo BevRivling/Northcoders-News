@@ -113,6 +113,13 @@ body {
   box-shadow: 3px 3px 2px #42393a;
 }
 
+.active-link {
+  background-color: white;
+  color: rgb(188, 5, 49);
+  cursor: pointer;
+  box-shadow: 3px 3px 2px #42393a;
+}
+
 /* Main */
 .main {
   display: flex;
@@ -738,7 +745,7 @@ button.sett-butts {
   margin-top: 30px;
 }
 
-.sett-butts:hover {
+button.sett-butts:hover {
   cursor: pointer;
   background: rgba(94, 158, 60, 0.5);
   transition: 400ms;

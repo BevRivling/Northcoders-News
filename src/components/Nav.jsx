@@ -4,19 +4,23 @@ import { Link } from "@reach/router";
 const Nav = ({ topics, toggleNav, chooseTopic }) => {
   const navLinks = (
     <ul className="nav-links">
-      <Link key="-1" to="/">
+      <Link activeClassName="active-link" key="-1" to="/">
         <li key="home" onClick={() => chooseTopic("")}>
           home
         </li>
       </Link>
-      <Link key="0" to="/articles/all">
+      <Link activeClassName="active-link" key="0" to="/articles/all">
         <li key="all" onClick={() => chooseTopic("all")}>
           all
         </li>
       </Link>
       {topics.map((topic, i) => {
         return (
-          <Link key={i + 1} to={`/articles/${topic.slug}`}>
+          <Link
+            activeClassName="active-link"
+            key={i + 1}
+            to={`/articles/${topic.slug}`}
+          >
             <li key={topic.slug} onClick={() => chooseTopic(topic.slug)}>
               {topic.slug}
             </li>
